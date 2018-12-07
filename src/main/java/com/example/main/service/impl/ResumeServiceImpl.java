@@ -15,6 +15,7 @@ public class ResumeServiceImpl implements ResumeService{
     private ResumeDao resumeDao;
     @Override
     public Resume SaveResume(Resume resume) {
+        System.out.println(resumeDao.save(resume)+"给劲");
        Resume resume1= resumeDao.save(resume);
         return resume1;
     }

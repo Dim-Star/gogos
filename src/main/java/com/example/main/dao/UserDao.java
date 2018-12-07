@@ -2,6 +2,8 @@ package com.example.main.dao;
 
 import com.example.main.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +11,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
+    @Query(value = "select * from user u where u.phone_number =:phonenumber and u.password=:password",nativeQuery = true)
+    public User Login(@Param("phonenumber") String phone_number,@Param("password") String password);
+    @Query(value = "select * from user u where u.phone_number =:phonenumber",nativeQuery = true)
+    public User WxLogin(@Param("phonenumber")String phone_number);
+
 }
